@@ -5,7 +5,7 @@ import pandas as pd
 import time
 
 import settings
-import Analisys
+import Analysis
 
 df = pd.read_excel("csv/Histórico dos Chamados.xlsx")
 
@@ -20,7 +20,7 @@ servicos = dfCategoria["SERVICO"].value_counts().index
 for i in range(10):
     # Pegar descricao por serviço por categoria
     descriptions = dfCategoria[dfCategoria["SERVICO"] == servicos[i]]["DESCRICAO"]
-    Analise = Analisys.Analisys(descriptions)
+    Analise = Analysis.Analysis(descriptions)
 
     # Obter tokens mais frequentes e Salvá-los em DataFrame
     # Pegar nome do serviço e corrigir Bug ao salvar nome de arquivo com / no nome
@@ -29,7 +29,7 @@ for i in range(10):
     Analise.getFrequentTokens(nameToSave=nameDf)
 
     # Gerar descrições que contiver 3 tokens, no minimo
-    goodDescripts = [Analise.analizeDescription(description, nameDf, 3)
+    goodDescripts = [Analise.analyzeDescription(description, nameDf, 3)
                      for description in descriptions]
     goodDescripts = [x for x in goodDescripts if x != None]
 
