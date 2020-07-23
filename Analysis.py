@@ -8,7 +8,7 @@ from nltk.tokenize import word_tokenize
 
 import settings
 
-class Analisys:
+class Analysis:
     def __init__(self, df):
         self.df = df
         self.df_tokens = {}
@@ -42,7 +42,7 @@ class Analisys:
         return freqTokens
 
     """ Pegará as descrições que tiverem um numero de ocorrencias de tokens """
-    def analizeDescription(self, description, nameDfTokens, occurrences, separator='.', quantity=150):
+    def analyzeDescription(self, description, nameDfTokens, occurrences, separator='.', quantity=150):
         tokens = self.df_tokens[nameDfTokens]["word"][:quantity]
         # Acessar cada frase separada por um separador (por padrão, "."),
         # pra resumir as descrições. Vai pegar a primeira que tiver esse numero de ocorrencias
