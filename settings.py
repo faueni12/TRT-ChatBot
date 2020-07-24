@@ -22,8 +22,14 @@ stop_words += ['<', 'br', '>', 'nbsp', ',', '.', ';', '&', '(', ')', '!', "''", 
     'turma', 'possível', 'href', 'href=', 'urgente', 'presidência', 'usada', 'veio', 'encontra',
     ]
 
-simbols = ['<br>', 'nbsp', '&', '&nbsp', '`', '@', '/a', 'href', 'href=', 'usp=sharing',
- '<span>', '</span>', '[', ']', '&', '(', ')', '!', "''", '"' ,'``', '/a', 'div', '/div']
+# Simbolos pra serem removidos nas descrições
+simbols = ['<br>','</h2>', '<b>', '<ul>', '</ul', '</b>', 'li>', 
+    '/li', '<li>', '</li', '<h2>', '</h3>', '<h3>', '</h1>', '<h1>', '</h4>', '<h4>', 
+    '</h5>', '<h5>', '</h6>', '<h6>',  'nbsp', '&', '&nbsp', '`', '@', '/a', 'href',
+    'href=', 'usp=sharing', '<span>', '</span>', '[', ']', '&', '(', ')', '!', "''",
+    '"' ,'``', '/a', 'div', '/div']
+
+simbols2 = ['</>', '<>', '/>', '"', '/i>']
 
 # Ao tentar reduzir a frase tirando o ".", pode ser tirado o ".com" ".br", etc
 # Isso é pra diminuir a chance de retirar um "." sem ser no fim das frases.

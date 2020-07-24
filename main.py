@@ -29,16 +29,20 @@ for i in range(10):
     Analise.getFrequentTokens(nameToSave=nameDf)
 
     # Gerar descrições que contiver 3 tokens, no minimo
-    goodDescripts = [Analise.analyzeDescription(description, nameDf, 3)
+    goodDescripts = [Analise.analizeDescription(description, nameDf, 3)
                      for description in descriptions]
     goodDescripts = [x for x in goodDescripts if x != None]
 
     # Retirar alguns simbolos das descrições
-    greatDescripts = []
-    for descript in goodDescripts:
-        for simbol in settings.simbols:
-            descript = ''.join(descript.split(simbol))
-        greatDescripts += [descript]
+    greatDescripts = Analise.removeBadSimbols(goodDescripts,
+        settings.simbols, simbols2=settings.simbols)
+    # E também tags html / javascript
+    greatDescripts = Analise.removeTags_(greatDescripts)
+
+    # Salvar as descrições em csv
+    dfDescript = pd.Series(greatDescripts)
+    nameDf = "csv/Descrições - SIFBD - "+servico+".csv"
+    dfDescript.to_csv(nameDf, encoding='utf-8')
 
 for i in greatDescripts:
     print(i)

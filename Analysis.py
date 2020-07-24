@@ -42,7 +42,7 @@ class Analysis:
         return freqTokens
 
     """ Pegará as descrições que tiverem um numero de ocorrencias de tokens """
-    def analyzeDescription(self, description, nameDfTokens, occurrences, separator='.', quantity=150):
+    def analizeDescription(self, description, nameDfTokens, occurrences, separator='.', quantity=150):
         tokens = self.df_tokens[nameDfTokens]["word"][:quantity]
         # Acessar cada frase separada por um separador (por padrão, "."),
         # pra resumir as descrições. Vai pegar a primeira que tiver esse numero de ocorrencias
@@ -52,3 +52,40 @@ class Analysis:
             qtTokens = len([occur for occur in occurrencesTokens if occur > 0])
             if qtTokens >= occurrences:
                 return descript
+
+    """ Aqui, os símbolos serão removidos"""
+    def removeBadSimbols(self, descriptions, simbols, **kwargs):
+        greatDescripts = []
+        for descript in descriptions:
+            for simbol in simbols:
+                descript = ''.join(descript.split(simbol))
+            # Solução de bug de não separar alguns simbolos
+            for simbol in kwargs.get("simbols2"):
+                descript = ''.join(descript.split(simbol))                
+            greatDescripts += [descript]
+        return greatDescripts
+    
+    """ Remover tags html, javascript, etc """
+    def removeTags_(self, descriptions):
+        greatDescripts = []
+        for description in descriptions:
+            for _ in range(10):
+                openTag = description.find('<')
+                if openTag != -1:
+                    # Se tiver, procurar a primeira tag de fechar ('</')
+                    initCloseTag = description[openTag:].find('</')
+                    if initCloseTag != -1:
+                        endCloseTag = description[initCloseTag:].find('>')
+                        description = description[:openTag] + description[endCloseTag + 1:]
+                    # Se a tag não tiver "</"
+                    else:
+                        endCloseTag = description[openTag:].find('>')                    
+                        if endCloseTag != -1:    
+                            description = description[:openTag] + description[openTag + endCloseTag + 1:]
+                        else:
+                            description = description[:openTag]
+                # Se a descrição não tiver nenhuma tag, não muda nada
+                else:
+                    greatDescripts += [description.strip()]
+                    break
+        return greatDescripts
