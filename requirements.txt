@@ -3,3 +3,9 @@ pandas
 nltk
 
 xlrd
+
+beautifulsoup4
+
+scikit-learn
+
+wordcloud
