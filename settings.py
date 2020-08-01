@@ -3,28 +3,27 @@
 from nltk.corpus import stopwords
 
 # Lista de palavras não tão importantes pra análise
-stop_words = stopwords.words('portuguese')
+STOP_WORDS = stopwords.words('portuguese')
 
 # Exceto essas
-stop_words.remove('não')
-stop_words.remove('esta')
-stop_words.remove('está')
-stop_words.remove('estão')
+STOP_WORDS.remove('não')
+STOP_WORDS.remove('esta')
+STOP_WORDS.remove('está')
+STOP_WORDS.remove('estão')
 
-stop_words += ['<', 'br', '>', 'nbsp', ',', '.', ';', '&', '(', ')', '!', "''", '``', 'bom', 'dia', 
-    'g', '-', 'vt', 'mat', 'nº', 'pois', ':', '@', 'ter', 'gentileza', 'boa', 'tarde', 'noite',
-    'obrigado', '?', 'juiz', 'hoje', 'secretaria', 'dra', 'urgencia', 'urgência', 'humberto',
-    'desta', '<span>', '</span>', '/span', 'span', 'ser', 'segue', 'gt', 'intuito', '--', 'div', '/div', 'obs',
-    '[',']', 'destinar', 'ronaldo', 'compor', 'após', 'segs', '2º', 'seres.', '*', 'conforme',
-    'atenciosamente', 'natal', 'equipe', 'escola', '2', 'segundo', 'vara', 'judicial', 'dois',
-    'apoio', 'encontra-se', '1', 'seres', 'fernades/ivia', 'ivia', 'distribuição', 
-    'encaminhar', 'coordenadoria', 'feita.', '/a', 'demais', 'tácio', 'usp=sharing', '3', '4',
-    'turma', 'possível', 'href', 'href=', 'urgente', 'presidência', 'usada', 'veio', 'encontra',
-    ]
-
-simbols = ['<br>', 'nbsp', '&', '&nbsp', '`', '@', '/a', 'href', 'href=', 'usp=sharing',
- '<span>', '</span>', '[', ']', '&', '(', ')', '!', "''", '"' ,'``', '/a', 'div', '/div']
-
-# Ao tentar reduzir a frase tirando o ".", pode ser tirado o ".com" ".br", etc
-# Isso é pra diminuir a chance de retirar um "." sem ser no fim das frases.
-stop_ponto = ['http', 'www', '.com', '.net', '.co', '.org', '.br']
+STOP_WORDS += [
+    'ramal', 'nbsp', 'bom', 'dia', 'g', 'vt', 'mat', 'nº', 'pois', 'ter', 'gentileza',
+    'boa', 'tarde', 'noite', 'n', 'obrigado', 'juiz', 'hoje', 'secretaria', 'dra',
+    'urgencia', 'urgência', 'humberto', 'desta', 'ser', 'segue', 'gt', 'intuito', 'obs',
+    'destinar', 'ronaldo', 'compor', 'após', 'segs', 'seres.', 'conforme',
+    'atenciosamente', 'natal', 'equipe', 'escola', 'segundo', 'vara', 'judicial', 'dois',
+    'apoio', 'encontra-se', 'seres', 'fernades/ivia', 'ivia', 'distribuição', 
+    'encaminhar', 'coordenadoria', 'feita.', 'demais', 'tácio', 'usp=sharing',
+    'turma', 'possível', 'urgente', 'presidência', 'usada', 'veio', 'encontra',
+    'ser', 'setor', 'favor', 'varas', 'curso', 'uso', 'servidora', 'vez', 'grata', 'grato', 
+    'mary','ann', 'att', 'ramal', 'cejusc', 'juíza', 'todos', 'sessão', 'felipinho', 'falar',
+    'sala', 'fica', 'sozinho', 'fazer', 'sendo', 'consegue', 'vezes', 'trabalho', 'tombo',
+    
+    #Acesso a rede
+    'sevidor', 
+]
